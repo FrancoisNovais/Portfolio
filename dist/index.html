@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - François</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header__container wrapper">
+        <div class="header__logo-wrapper">
+          <div class="header__logo">
+            <span class="logo-fn">fn(</span>
+            <span class="logo-brace">{</span>
+            <span class="logo-typed" id="typed-text"></span>
+            <span class="logo-brace">}</span>
+            <span class="logo-fn">)</span>
+          </div>
+        </div>
+
+        <nav class="header__nav">
+          <a class="header__link" href="#projets">Projets</a>
+          <a class="header__link" href="#about">À propos</a>
+        </nav>
+      </div>
+      <hr class="header__divider" />
+    </header>
+
+    <!-- Hero -->
+    <section class="hero wrapper">
+      <h1 class="hero__title">
+        <span class="hero__title-part">Bonjour, je suis François,</span>
+        <span class="hero__title-part">développeur web le jour,</span>
+        <span class="hero__title-part">dompteur de bugs la nuit</span>
+      </h1>
+      <p class="hero__subtitle">
+        Je transforme le code et le café en projets qui ont du sens.
+      </p>
+      <a href="#projets" class="hero__cta cta">Voir mes projets</a>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" class="projects wrapper">
+      <h2 class="projects__title">Mes projets</h2>
+      <div class="projects__grid">
+        
+        <div class="projects__card" data-url="/projects/projet-1/">
+          <h3 class="projects__card-title">Projet 1</h3>
+          <p class="projects__card-description">
+            Une description courte et percutante du projet.
+          </p>
+        </div>
+        
+        <div class="projects__card" data-url="/projects/projet-2/">
+          <h3 class="projects__card-title">Projet 2</h3>
+          <p class="projects__card-description">
+            Une description courte et percutante du projet.
+          </p>
+        </div>
+        
+        <div class="projects__card" data-url="/projects/projet-3/">
+          <h3 class="projects__card-title">Projet 3</h3>
+          <p class="projects__card-description">
+            Une description courte et percutante du projet.
+          </p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-body project-content"></div>
+      </div>
+    </div>
+
+    <script src="/assets/js/modal.js"></script>
+    <script>
+      const text = `"Dév Fullstack"`; // texte à afficher
+      const typedEl = document.getElementById('typed-text');
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          typedEl.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, 100); // vitesse de frappe (ms)
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        type();
+      });
+    </script>
+  </body>
+</html>
