@@ -7,6 +7,7 @@
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy",
+    "deploy": "npm run build && gh-pages -d dist",
     "format": "prettier --write \"src/**/*.{js,css,html,njk}\"",
     "lint:js": "eslint src/**/*.js",
     "lint:css": "stylelint \"src/**/*.css\" --fix",
@@ -22,6 +23,7 @@
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "gh-pages": "^6.3.0",
     "jsdom": "^27.1.0",
     "prettier": "^3.6.2",
     "stylelint": "^16.25.0",

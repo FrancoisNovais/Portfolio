@@ -1,8 +1,9 @@
 export default function(eleventyConfig) {
+  // Copier tous les assets (CSS, images, JS) vers dist
   eleventyConfig.addPassthroughCopy("src/assets");
 
+  // Collection projets triée par date décroissante
   eleventyConfig.addCollection("projects", function(collectionApi) {
-    // Récupère tous les fichiers Markdown dans src/projects et trie par date décroissante
     return collectionApi.getFilteredByGlob("src/projects/*.md")
       .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
   });
@@ -12,5 +13,6 @@ export default function(eleventyConfig) {
       input: "src",
       output: "dist",
     },
+    pathPrefix: "/Portfolio/", 
   };
-}
+};
