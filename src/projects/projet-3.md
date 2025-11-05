@@ -1,50 +1,58 @@
 ---
-title: "Projet 3"
-description: "Une description courte et percutante du projet."
+title: "ExLibrisDomus"
+description: "Application web complète pour gérer une bibliothèque personnelle, les emprunts et les étagères."
 category: "Web Development"
-tags: ["Eleventy", "Portfolio", "Neo-Brutalism"]
+tags: ["SvelteKit", "TypeScript", "Docker", "Express", "PostgreSQL", "Sequelize", "Joi", "Swagger"]
 date: 2025-11-05
-image: "/assets/images/projet-complet.jpg"
+image: "/assets/imgs/exlibrisdmous.webp"
 layout: null
 ---
 
-# Projet 3
+# ExLibrisDomus
 
-Bienvenue dans le projet 3.
+Découvrez **ExLibrisDomus**, une application web moderne pour gérer une bibliothèque personnelle et les emprunts.
 
 ## Introduction
 
-Ici, présentation du projet, son contexte et ses objectifs.
+Cette application front-end est développée avec **SvelteKit** et **TypeScript**, et utilise **Express** pour le backend. La persistance des données est assurée par **PostgreSQL** via **Sequelize**. Les validations sont gérées par **Joi**, et l'API est documentée avec **Swagger**.
 
-### Liste à puces
+### Technologies utilisées
 
-* Fonctionnalité principale
-* Fonctionnalité secondaire
-* Points forts du projet
+<p class="project-tags">
+  <span class="tag">SvelteKit</span>
+  <span class="tag">TypeScript</span>
+  <span class="tag">Docker</span>
+  <span class="tag">Express</span>
+  <span class="tag">PostgreSQL</span>
+  <span class="tag">Sequelize</span>
+  <span class="tag">Joi</span>
+  <span class="tag">Swagger</span>
+</p>
 
-### Citation
+### Fonctionnalités principales
 
-> Ce projet démontre comment utiliser Eleventy pour un portfolio.
+* Gestion complète de livres, auteurs, catégories, emprunt de livre et étagères de rangement
+* Ajout, modification et suppression de livres et auteurs
+* Gestion du rangement et des emprunts
+* Interface responsive et intuitive
+* Historique des emprunts et disponibilités en temps réel
 
-### Code
+### Points forts du projet
 
-```js
-// Exemple de code JavaScript
-function helloWorld() {
-  console.log('Hello World');
-}
-helloWorld();
-```
+* Stack moderne TypeScript full-stack
+* Déploiement facilité via Docker
+* API RESTful documentée avec Swagger
+* Code modulable et maintenable
+* Idéal pour apprendre à gérer des projets web complexes avec bases de données relationnelles
+
+### Screenshot
+
+![ExLibrisDomus](./assets/imgs/exlibrisdmous.webp)
 
 ### Lien
 
-[Voir le projet sur GitHub](https://github.com/mon-projet)
-
-
-### Texte enrichi
-
-Utiliser **gras**, *italique*, `inline code` et des combinaisons pour enrichir votre contenu.
+[Voir le projet sur GitHub](https://github.com/FrancoisNovais/ExLibrisDomus)
 
 ### Conclusion
 
-Cette structure peut être utilisée pour les projets.
+ExLibrisDomus illustre comment combiner **SvelteKit**, **TypeScript**, **Express** et **PostgreSQL** pour créer une application web complète et robuste, avec gestion des livres et des emprunts, tout en restant modulable et déployable via Docker.

@@ -45,19 +45,36 @@
     </section>
 
     <!-- Section Projets -->
-    <section id="projets" class="projects wrapper">
-      <h2 class="projects__title">Mes projets</h2>
-      <div class="projects__grid">
-        {% for project in collections.projects %}
-        <div class="projects__card" data-url="{{ project.url }}">
-          <h3 class="projects__card-title">{{ project.data.title }}</h3>
-          <p class="projects__card-description">
-            {{ project.data.description }}
-          </p>
-        </div>
-        {% endfor %}
+<section id="projets" class="projects wrapper">
+  <h2 class="projects__title">Mes projets</h2>
+  <div class="projects__grid">
+    {% for project in collections.projects %}
+    <div class="projects__card" data-url="{{ project.url }}">
+      {% if project.data.image %}
+      <div class="projects__card-image">
+        <img src="{{ project.data.image }}" alt="{{ project.data.title }}" />
       </div>
-    </section>
+      {% endif %}
+
+      <div class="projects__card-content">
+        <h3 class="projects__card-title">{{ project.data.title }}</h3>
+        <p class="projects__card-description">
+          {{ project.data.description }}
+        </p>
+
+        {% if project.data.tags %}
+        <p class="project-tags">
+          {% for tag in project.data.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
 
     <!-- Modal -->
     <div id="project-modal" class="modal">
@@ -67,13 +84,12 @@
       </div>
     </div>
 
-<script type="module">
-  import typeText from '/assets/js/typed.js';
-  import initProjectModal from '/assets/js/modal.js';
+    <script type="module">
+      import typeText from '/assets/js/typed.js';
+      import initProjectModal from '/assets/js/modal.js';
 
-  typeText('#typed-text', '"Dév Fullstack"', 100);
-  initProjectModal();
-</script>
-
+      typeText('#typed-text', '"Dév Fullstack"', 100);
+      initProjectModal();
+    </script>
   </body>
 </html>

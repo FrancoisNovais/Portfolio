@@ -1,50 +1,51 @@
 ---
-title: "Projet 1"
-description: "Une description courte et percutante du projet."
+
+title: "ChatForge"
+description: "Un assistant intelligent basé sur l'IA pour générer du contenu et des conversations."
 category: "Web Development"
-tags: ["Eleventy", "Portfolio", "Neo-Brutalism"]
-date: 2025-11-05
-image: "/assets/images/projet-complet.jpg"
+tags: ["JavaScript", "AI", "Svelte", "Pocketbase"]
+date: 2025-11-03
+image: "/assets/imgs/chatforge.webp"
 layout: null
 ---
 
-# Projet 1
+# ChatForge
 
-Bienvenue dans le projet 1.
+Découvrez **ChatForge**, un projet qui explore l'intégration de l'intelligence artificielle dans un assistant conversationnel.
 
 ## Introduction
 
-Ici, présentation du projet, son contexte et ses objectifs.
+ChatForge est une application front-end développée avec Svelte. Elle permet de créer une interface de chat où l’utilisateur peut échanger avec une IA via l’API Mistral, tout en stockant les conversations localement avec PocketBase.
 
-### Liste à puces
+### Technologies utilisées
 
-* Fonctionnalité principale
-* Fonctionnalité secondaire
-* Points forts du projet
+<p class="project-tags">
+  <span class="tag">JavaScript</span>
+  <span class="tag">Svelte</span>
+  <span class="tag">AI</span>
+  <span class="tag">API</span>
+</p>
 
-### Citation
+### Fonctionnalités principales
 
-> Ce projet démontre comment utiliser Eleventy pour un portfolio.
+* Génération de texte via prompts
+* Conversations interactives
+* Intégration facile dans des projets web
 
-### Code
+### Points forts du projet
 
-```js
-// Exemple de code JavaScript
-function helloWorld() {
-  console.log('Hello World');
-}
-helloWorld();
-```
+* Utilisation de JavaScript moderne
+* Code modulable et clair
+* Idéal pour apprendre à manipuler des API d'IA
+
+### Screenshot
+
+![ChatForge](./assets/imgs/chatforge.webp)
 
 ### Lien
 
-[Voir le projet sur GitHub](https://github.com/mon-projet)
-
-
-### Texte enrichi
-
-Utiliser **gras**, *italique*, `inline code` et des combinaisons pour enrichir votre contenu.
+[Voir le projet sur GitHub](https://github.com/FrancoisNovais/ChatForge)
 
 ### Conclusion
 
-Cette structure peut être utilisée pour les projets.
+ChatForge illustre comment combiner **JavaScript**, **API** et intelligence artificielle pour créer des outils interactifs et utiles, tout en restant modulable pour d’autres projets web.

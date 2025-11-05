@@ -1,50 +1,60 @@
 ---
-title: "Projet 2"
-description: "Une description courte et percutante du projet."
+title: "CalmCSS"
+description: "Une bibliothèque CSS minimaliste et épurée conçue pour simplifier la mise en route de petits projets."
 category: "Web Development"
-tags: ["Eleventy", "Portfolio", "Neo-Brutalism"]
-date: 2025-11-05
-image: "/assets/images/projet-complet.jpg"
+tags: ["CSS"]
+date: 2025-11-02
+image: "/assets/imgs/calmcss.webp"
 layout: null
 ---
 
-# Projet 2
+# CalmCSS
 
-Bienvenue dans le projet 2.
+Découvrez **CalmCSS**, une petite bibliothèque CSS pensée pour créer des interfaces web légères, élégantes et rapides à mettre en œuvre.
 
 ## Introduction
 
-Ici, présentation du projet, son contexte et ses objectifs.
+CalmCSS a été conçue pour répondre à un besoin :
 
-### Liste à puces
+* **Style simple**, sans surcharge.
+* **Composants réutilisables**.
+* Approche minimaliste pour les développeurs front‑end qui veulent du CSS direct, sans framework lourd.
 
-* Fonctionnalité principale
-* Fonctionnalité secondaire
-* Points forts du projet
+### Technologies & usage
 
-### Citation
+<p class="project-tags">
+  <span class="tag">CSS</span>
+</p>
 
-> Ce projet démontre comment utiliser Eleventy pour un portfolio.
+### Fonctionnalités principales
 
-### Code
+* Grille et layout ultra‑léger
+* Styles de base pour typographie, boutons et cards
+* Facile à intégrer dans tout projet web
+* Sans dépendance JavaScript : juste du CSS
 
-```js
-// Exemple de code JavaScript
-function helloWorld() {
-  console.log('Hello World');
-}
-helloWorld();
+### Points forts du projet
+
+* Rapidité de chargement : taille réduite
+* Style cohérent et épuré
+* Idéal pour prototypes ou projets front‑end simples
+
+### Exemple de code
+
+```html
+<link rel="stylesheet" href="calmcss.min.css">
+
+<div class="cc-card">
+  <h2 class="cc-card__title">Titre</h2>
+  <p class="cc-card__text">Texte de la carte avec CalmCSS.</p>
+  <button class="cc-btn cc-btn--primary">Action</button>
+</div>
 ```
 
 ### Lien
 
-[Voir le projet sur GitHub](https://github.com/mon-projet)
-
-
-### Texte enrichi
-
-Utiliser **gras**, *italique*, `inline code` et des combinaisons pour enrichir votre contenu.
+[Voir le projet sur GitHub](https://github.com/FrancoisNovais/CalmCSS)
 
 ### Conclusion
 
-Cette structure peut être utilisée pour les projets.
+CalmCSS montre qu’un bon design n’a pas besoin d’être complexe : avec **CSS léger**, on peut obtenir des interfaces propres, rapides et flexibles, tout en gardant une approche minimaliste et facile à maintenir.
