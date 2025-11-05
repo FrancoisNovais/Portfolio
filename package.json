@@ -11,7 +11,8 @@
     "lint:js": "eslint src/**/*.js",
     "lint:css": "stylelint \"src/**/*.css\" --fix",
     "lint": "npm run lint:js && npm run lint:css",
-    "check": "npm run lint && npm run format"
+    "check": "npm run lint && npm run format",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -21,9 +22,11 @@
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "jsdom": "^27.1.0",
     "prettier": "^3.6.2",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-prettier": "^5.0.3"
+    "stylelint-prettier": "^5.0.3",
+    "vitest": "^4.0.7"
   }
 }

@@ -17,11 +17,9 @@
       <div class="header__container wrapper">
         <div class="header__logo-wrapper">
           <div class="header__logo">
-            <span class="logo-fn">fn(</span>
-            <span class="logo-brace">{</span>
+            <span class="logo">fn({</span>
             <span class="logo-typed" id="typed-text"></span>
-            <span class="logo-brace">}</span>
-            <span class="logo-fn">)</span>
+            <span class="logo">})</span>
           </div>
         </div>
 
@@ -83,23 +81,13 @@
       </div>
     </div>
 
-    <script src="/assets/js/modal.js"></script>
-    <script>
-      const text = `"Dév Fullstack"`; // texte à afficher
-      const typedEl = document.getElementById('typed-text');
-      let index = 0;
+<script type="module">
+  import typeText from '/assets/js/typed.js';
+  import initProjectModal from '/assets/js/modal.js';
 
-      function type() {
-        if (index < text.length) {
-          typedEl.textContent += text.charAt(index);
-          index++;
-          setTimeout(type, 100); // vitesse de frappe (ms)
-        }
-      }
+  typeText('#typed-text', '"Dév Fullstack"', 100);
+  initProjectModal();
+</script>
 
-      window.addEventListener('DOMContentLoaded', () => {
-        type();
-      });
-    </script>
   </body>
 </html>
