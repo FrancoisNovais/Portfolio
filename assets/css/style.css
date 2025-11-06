@@ -446,6 +446,59 @@ body {
   border: 1px solid #edece4;
 }
 
+/* ---------------- ABOUT ---------------- */
+.about {
+  padding: 6rem 0.5rem;
+}
+
+.about h2 {
+  font-family: Oswald, sans-serif;
+  font-size: 2.5rem;
+  color: #e7554e;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.about p {
+  font-family: Inter, sans-serif;
+  font-size: 1.1rem;
+  color: #edece4;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 1.5rem auto;
+  text-align: justify;
+}
+
+.about p strong {
+  color: #e7554e;
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+  padding: 3rem 0.5rem;
+  background-color: #0a0a0a;
+  border-top: 3px solid #e7554e;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #edece4;
+}
+
+.footer a {
+  color: #e7554e;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ff6b5c;
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (width <= 1024px) {

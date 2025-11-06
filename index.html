@@ -314,26 +314,27 @@
       </div>
     </section>
 
+    <!-- Section À propos -->
+    <section id="about" class="about wrapper">
+      <h2 class="projects__title">À propos de moi</h2>
+      <p>
+        Bonjour ! Je suis <strong>François Novais</strong>, développeur
+        <strong>fullstack</strong> en reconversion. Je crée des applications web modernes
+        qui allient <strong>code clair</strong>, <strong>expérience utilisateur soignée</strong>
+        et <strong>performances optimales</strong>.
+      </p>
+      <p>
+        Ce portfolio présente mes projets personnels et professionnels,
+        illustrant ma capacité à travailler sur <strong>tous les aspects d’une application web</strong>,
+        du frontend au backend, avec des technologies variées et des solutions modulables.
+      </p>
+      <p>
+        Toujours curieux et motivé, je cherche à relever de nouveaux défis techniques
+        et à construire des projets utiles et bien pensés.
+      </p>
+    </section>
 
-<!-- Modal générale -->
-<div id="project-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <div class="modal-body"></div>
-  </div>
-</div>
-
-
-<!-- Modal générale -->
-<div id="project-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <div class="modal-body"></div>
-  </div>
-</div>
-
-
-    <!-- Modal -->
+    <!-- Modal générale -->
     <div id="project-modal" class="modal">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
@@ -341,13 +342,20 @@
       </div>
     </div>
 
-  <script type="module">
-    import typeText from "/Portfolio/assets/js/typed.js";
-    import initProjectModal from "/Portfolio/assets/js/modal.js";
+    <!-- Footer -->
+    <footer class="footer wrapper">
+      <p>
+        &copy; 2025 François Novais — Développeur fullstack<br />
+        <a href="mailto:francois@example.com">francois@example.com</a>
+      </p>
+    </footer>
 
-    typeText('#typed-text', '"Dév Fullstack"', 100);
-    initProjectModal();
-  </script>
+    <script type="module">
+      import typeText from "/Portfolio/assets/js/typed.js";
+      import initProjectModal from "/Portfolio/assets/js/modal.js";
 
+      typeText('#typed-text', '"Dév Fullstack"', 100);
+      initProjectModal();
+    </script>
   </body>
 </html>
