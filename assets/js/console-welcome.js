@@ -1,4 +1,3 @@
-// console-welcome.js
 export default function initConsoleWelcome() {
   console.clear();
 
@@ -14,9 +13,12 @@ export default function initConsoleWelcome() {
     "%cSi tu es ici, c'est que mon travail t'intéresse sûrement 😉",
     styles.info
   );
-  console.log('%cTu peux me retrouver sur LinkedIn ou GitHub :', styles.info);
   console.log(
-    '%cLinkedIn : https://www.linkedin.com/in/fran%C3%A7ois-novais/',
+    "%cPour en savoir plus sur moi et mon travail, n'hésite pas à me contacter :",
+    styles.info
+  );
+  console.log(
+    '%cLinkedIn : https://www.linkedin.com/in/françois-novais/',
     styles.link
   );
   console.log('%cGitHub   : https://github.com/FrancoisNovais', styles.link);
@@ -24,7 +26,7 @@ export default function initConsoleWelcome() {
   console.log(
     "\n💡 Et sinon… si tu aimes l’aventure, n'hésite pas à taper %cplay()%c pour un petit moment de fun dans cette console !",
     styles.link, // style pour "play()"
-    styles.hint // style pour le reste du texte après play()
+    styles.hint // style pour le reste du texte après "play()"
   );
 
   // Expose play() pour lancer le jeu
