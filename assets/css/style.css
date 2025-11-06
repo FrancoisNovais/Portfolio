@@ -441,10 +441,27 @@ body {
 
 .project-content img {
   max-width: 100%;
+  height: auto;
   display: block;
-  margin: 1rem 0;
+  margin: 1rem auto; /* centre et espace autour */
   border: 1px solid #edece4;
 }
+
+.project-content ul,
+.project-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  list-style-position: outside; /* plus lisible */
+  list-style-type: disc;
+}
+
+.modal-content {
+  overflow-y: auto;
+  max-height: 90vh;
+  padding: 2rem;
+}
+
+
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (width <= 1024px) {
