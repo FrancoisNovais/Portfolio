@@ -80,7 +80,7 @@ export default function initBubbles() {
     ctx.clearRect(0, 0, width, height);
 
     // Mise à jour des bulles
-    bubbles.forEach(b => b.update());
+    bubbles.forEach((b) => b.update());
 
     // Mise à jour des fragments d’explosion
     for (let i = particles.length - 1; i >= 0; i--) {
@@ -98,7 +98,7 @@ export default function initBubbles() {
   }
 
   // Clic → changer couleur + exploser la bulle
-  document.body.addEventListener('click', e => {
+  document.body.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;

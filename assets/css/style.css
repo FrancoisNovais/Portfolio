@@ -223,7 +223,7 @@ body {
 }
 
 .hero__cta:hover {
-  background-color: #ff6b5c;
+  background-color: var(--main-color, #e7554e);
   transform: translate(-4px, -4px);
   box-shadow: 12px 12px 0 #edece4;
 }
@@ -504,8 +504,13 @@ body {
 
 #back-to-top:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 var(--main-color, #e7554e);
-  background-color: #ff6b5c;
+  box-shadow: 9px 9px 0 #edece4;
+  background-color: var(--main-color, #e7554e);
+}
+
+#back-to-top:active {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #edece4;
 }
 
 /* ---------------- FOOTER ---------------- */
