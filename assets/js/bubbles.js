@@ -77,10 +77,15 @@ export default function initBubbles() {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
+
     bubbles.forEach((b) => {
       const d = Math.hypot(b.x - clickX, b.y - clickY);
       if (d < b.r) {
+        // 1️⃣ appliquer la couleur aux éléments
         applyColor(b.color);
+
+        // 2️⃣ mettre à jour la variable CSS globale
+        document.documentElement.style.setProperty('--main-color', b.color);
       }
     });
   });
