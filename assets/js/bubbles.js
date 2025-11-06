@@ -23,7 +23,6 @@ export default function initBubbles() {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      // Taille plus variée et plus grande
       this.r = Math.random() * 50 + 20; // 20 à 70px
       this.color =
         bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
@@ -45,47 +44,78 @@ export default function initBubbles() {
     }
   }
 
-  // Moins de bulles : 8 au lieu de 12
+  // Fragments d’explosion
+  class Particle {
+    constructor(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 6;
+      this.vy = (Math.random() - 0.5) * 6;
+      this.r = Math.random() * 6 + 2;
+      this.color = color;
+      this.alpha = 1;
+      this.decay = Math.random() * 0.03 + 0.02;
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.alpha -= this.decay;
+      this.draw();
+    }
+  }
+
   const bubbles = Array.from({ length: 8 }, () => new Bubble());
+  const particles = [];
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    bubbles.forEach((b) => b.update());
+
+    // Mise à jour des bulles
+    bubbles.forEach(b => b.update());
+
+    // Mise à jour des fragments d’explosion
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.update();
+      if (p.alpha <= 0) particles.splice(i, 1);
+    }
+
     requestAnimationFrame(animate);
   }
 
   // --- éléments à recolorer ---
-  const colorElements = [];
-  document.querySelectorAll('*').forEach((el) => {
-    const style = getComputedStyle(el);
-    ['color', 'borderColor', 'backgroundColor', 'boxShadow'].forEach((prop) => {
-      if (
-        style[prop]?.includes('rgb(231, 85, 78)') ||
-        style[prop]?.includes('#e7554e')
-      ) {
-        colorElements.push({ el, prop, original: style[prop] });
-      }
-    });
-  });
-
   function applyColor(newColor) {
     document.documentElement.style.setProperty('--main-color', newColor);
   }
 
-  // Clic → change la couleur
-  document.body.addEventListener('click', (e) => {
+  // Clic → changer couleur + exploser la bulle
+  document.body.addEventListener('click', e => {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
 
-    bubbles.forEach((b) => {
+    bubbles.forEach((b, i) => {
       const d = Math.hypot(b.x - clickX, b.y - clickY);
       if (d < b.r) {
-        // 1️⃣ appliquer la couleur aux éléments
+        // 1️⃣ appliquer la couleur
         applyColor(b.color);
 
-        // 2️⃣ mettre à jour la variable CSS globale
-        document.documentElement.style.setProperty('--main-color', b.color);
+        // 2️⃣ créer des fragments
+        for (let j = 0; j < 15; j++) {
+          particles.push(new Particle(b.x, b.y, b.color));
+        }
+
+        // 3️⃣ réinitialiser la bulle
+        b.reset();
       }
     });
   });
