@@ -349,6 +349,7 @@ body {
 }
 
 /* ---------------- MODAL ---------------- */
+
 /* animation: partir d'une position traduite+scaled -> centre+scale 1 */
 .modal {
   display: none;
@@ -385,14 +386,16 @@ body {
   flex-direction: column;
 
   /* transform initial --> on part d'un translate(dx,dy) scale(0.2) */
-  transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(0.22);
+  transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.22);
   opacity: 0;
-  transition: transform 0.42s cubic-bezier(.2,.9,.3,1), opacity 0.32s ease;
+  transition:
+    transform 0.42s cubic-bezier(0.2, 0.9, 0.3, 1),
+    opacity 0.32s ease;
 }
 
 /* quand la modal s'ouvre on revient à centre/scale 1 */
 .modal--open .modal-content {
-  transform: translate(0px, 0px) scale(1);
+  transform: translate(0, 0) scale(1);
   opacity: 1;
 }
 

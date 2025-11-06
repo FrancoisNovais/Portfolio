@@ -396,31 +396,11 @@ Le jeu indique ensuite si le nombre mystère est <strong>plus grand</strong>, <s
         </p>
       </div>
     </footer>
-
+    import initProjectModal from "/Portfolio/assets/js/modal.js";
     <!-- Bouton "Remonter en haut" -->
     <button id="back-to-top" title="Remonter en haut">↑</button>
+    <button id="back-to-top" title="Remonter en haut">↑</button>
 
-    <script type="module">
-      import typeText from "/Portfolio/assets/js/typed.js";
-      import initProjectModal from "/Portfolio/assets/js/modal.js";
-      import initBubbles from "/Portfolio/assets/js/bubbles.js";
-      import initConsoleWelcome from "/Portfolio/assets/js/console-welcome.js";
-
-      // Lancer la welcome console
-      initConsoleWelcome();
-
-      typeText('#typed-text', '"Dév Fullstack"', 100);
-      initProjectModal();
-      initBubbles();
-
-      // Bouton retour en haut
-      const backToTop = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => {
-        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-      });
-      backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    </script>
+    <script type="module" src="./assets/js/main.js"></script>
   </body>
 </html>
