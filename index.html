@@ -404,12 +404,14 @@ Le jeu indique ensuite si le nombre mystère est <strong>plus grand</strong>, <s
       import typeText from "/Portfolio/assets/js/typed.js";
       import initProjectModal from "/Portfolio/assets/js/modal.js";
       import initBubbles from "/Portfolio/assets/js/bubbles.js";
-      import initConsoleDungeon from "/Portfolio/assets/js/console.js";
+      import initConsoleWelcome from "/Portfolio/assets/js/console-welcome.js";
+
+      // Lancer la welcome console
+      initConsoleWelcome();
 
       typeText('#typed-text', '"Dév Fullstack"', 100);
       initProjectModal();
       initBubbles();
-      initConsoleDungeon();
 
       // Bouton retour en haut
       const backToTop = document.getElementById('back-to-top');
