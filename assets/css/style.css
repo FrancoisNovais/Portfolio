@@ -351,9 +351,15 @@ body {
 }
 
 .modal-content {
+  background-color: #0a0a0a;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  border: 3px solid #e7554e;
+  box-shadow: 6px 6px 0 #edece4;
   overflow-y: auto;
   max-height: 90vh;
-  padding: 2rem;
+  position: relative;
 }
 
 .modal-close {
@@ -435,20 +441,10 @@ body {
 
 .project-content img {
   max-width: 100%;
-  height: auto;
   display: block;
-  margin: 1rem auto; /* centre et espace autour */
+  margin: 1rem 0;
   border: 1px solid #edece4;
 }
-
-.project-content ul,
-.project-content ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  list-style-position: outside; /* plus lisible */
-  list-style-type: disc;
-}
-
 
 
 /* ---------------- RESPONSIVE ---------------- */
