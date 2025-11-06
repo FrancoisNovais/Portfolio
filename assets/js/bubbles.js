@@ -95,6 +95,16 @@ export default function initBubbles() {
   // --- éléments à recolorer ---
   function applyColor(newColor) {
     document.documentElement.style.setProperty('--main-color', newColor);
+
+    // Convertir HEX en RGB pour la couche semi-transparente
+    const hex = newColor.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    document.documentElement.style.setProperty(
+      '--main-color-rgb',
+      `${r},${g},${b}`
+    );
   }
 
   // Clic → changer couleur + exploser la bulle

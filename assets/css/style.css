@@ -1,4 +1,9 @@
 /* ---------------- RESET ---------------- */
+:root {
+  --main-color: #e7554e;
+  --main-color-rgb: 231, 85, 78; /* pour rgba */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -175,7 +180,7 @@ body {
   margin-bottom: -0.05em;
   text-shadow:
     3px 3px 0 var(--main-color, #e7554e),
-    6px 6px 0 rgb(231 85 78 / 50%);
+    6px 6px 0 rgb(var(--main-color-rgb, 231, 85, 78), 0.5);
 }
 
 .hero__title-part:hover {
