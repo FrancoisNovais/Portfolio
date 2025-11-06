@@ -7,8 +7,17 @@ export default function initProjectModal() {
     card.addEventListener('click', () => {
       const projectId = card.dataset.projectId;
       const template = card.querySelector(`#project-${projectId}`);
+
+      // Nettoyage modal
       modalBody.innerHTML = '';
-      modalBody.appendChild(template.content.cloneNode(true));
+
+      // Clonage du template et wrapper pour CSS
+      const clone = template.content.cloneNode(true);
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('project-content');
+      wrapper.appendChild(clone);
+
+      modalBody.appendChild(wrapper);
       modal.style.display = 'flex';
     });
   });
