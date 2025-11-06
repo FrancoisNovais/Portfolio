@@ -351,15 +351,9 @@ body {
 }
 
 .modal-content {
-  background-color: #0a0a0a;
-  padding: 2rem;
-  max-width: 800px;
-  width: 100%;
-  border: 3px solid #e7554e;
-  box-shadow: 6px 6px 0 #edece4;
   overflow-y: auto;
   max-height: 90vh;
-  position: relative;
+  padding: 2rem;
 }
 
 .modal-close {
@@ -453,12 +447,6 @@ body {
   margin-bottom: 1rem;
   list-style-position: outside; /* plus lisible */
   list-style-type: disc;
-}
-
-.modal-content {
-  overflow-y: auto;
-  max-height: 90vh;
-  padding: 2rem;
 }
 
 
