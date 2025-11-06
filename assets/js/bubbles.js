@@ -1,6 +1,6 @@
 /**
- * Initialise l’animation de bulles interactives sur un canvas en arrière-plan.
- * Chaque bulle peut être cliquée pour changer la couleur principale et générer des fragments d’explosion.
+ * Initialise l'animation de bulles interactives sur un canvas en arrière-plan.
+ * Chaque bulle peut être cliquée pour changer la couleur principale et générer des fragments d'explosion.
  */
 export default function initBubbles() {
   const canvas = document.getElementById('bubbles-bg');
@@ -9,6 +9,8 @@ export default function initBubbles() {
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
+  let animationId = null; // Pour stocker l'ID de l'animation
+  let isAnimating = true; // État de l'animation
 
   /** Palette de couleurs disponibles pour les bulles */
   const bubbleColors = [
@@ -60,7 +62,7 @@ export default function initBubbles() {
   }
 
   /**
-   * Représente un fragment d’explosion créé lors du clic sur une bulle.
+   * Représente un fragment d'explosion créé lors du clic sur une bulle.
    */
   class Particle {
     /**
@@ -90,7 +92,7 @@ export default function initBubbles() {
       ctx.restore();
     }
 
-    /** Met à jour la position et l’opacité du fragment */
+    /** Met à jour la position et l'opacité du fragment */
     update() {
       this.x += this.vx;
       this.y += this.vy;
@@ -102,8 +104,10 @@ export default function initBubbles() {
   const bubbles = Array.from({ length: 8 }, () => new Bubble());
   const particles = [];
 
-  /** Boucle principale d’animation */
+  /** Boucle principale d'animation */
   function animate() {
+    if (!isAnimating) return;
+
     ctx.clearRect(0, 0, width, height);
 
     bubbles.forEach((b) => b.update());
@@ -114,7 +118,7 @@ export default function initBubbles() {
       if (p.alpha <= 0) particles.splice(i, 1);
     }
 
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
   }
 
   /**
@@ -170,4 +174,20 @@ export default function initBubbles() {
   canvas.style.pointerEvents = 'none';
 
   animate();
+
+  // Retourne des fonctions de contrôle
+  return {
+    stop: () => {
+      isAnimating = false;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    },
+    start: () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        animate();
+      }
+    }
+  };
 }
