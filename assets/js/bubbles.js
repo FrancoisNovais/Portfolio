@@ -140,6 +140,8 @@ export default function initBubbles() {
 
   /** Gestion du clic sur le canvas pour exploser les bulles */
   document.body.addEventListener('click', (e) => {
+    if (!isAnimating) return;
+
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
