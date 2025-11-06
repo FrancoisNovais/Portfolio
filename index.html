@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <canvas id="bubbles-bg"></canvas>
     <!-- Header -->
     <header class="header">
       <div class="header__container wrapper">
@@ -394,9 +395,11 @@
     <script type="module">
       import typeText from "/Portfolio/assets/js/typed.js";
       import initProjectModal from "/Portfolio/assets/js/modal.js";
+      import initBubbles from "/Portfolio/assets/js/bubbles.js";
 
       typeText('#typed-text', '"Dév Fullstack"', 100);
       initProjectModal();
+      initBubbles(); // lance l’animation des bulles
 
       // Bouton retour en haut
       const backToTop = document.getElementById('back-to-top');
