@@ -346,11 +346,14 @@
     <footer class="footer">
       <div class="footer-content wrapper">
         <p>
-          &copy; 2025 François Novais — Développeur fullstack<br />
-          <a href="https://github.com/FrancoisNovais" target="_blank" rel="noopener noreferrer">GitHub</a> 
+          &copy; 2025 François Novais — Développeur Fullstack<br />
+          <a href="https://github.com/FrancoisNovais" target="_blank" rel="noopener noreferrer">GitHub</a>
         </p>
       </div>
     </footer>
+
+    <!-- Bouton "Remonter en haut" -->
+    <button id="back-to-top" title="Remonter en haut">↑</button>
 
     <script type="module">
       import typeText from "/Portfolio/assets/js/typed.js";
@@ -358,6 +361,15 @@
 
       typeText('#typed-text', '"Dév Fullstack"', 100);
       initProjectModal();
+
+      // Bouton retour en haut
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     </script>
   </body>
 </html>
