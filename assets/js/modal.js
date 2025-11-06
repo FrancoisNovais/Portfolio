@@ -1,6 +1,3 @@
-/**
- * Opens project modal using the <template> inside each card
- */
 export default function initProjectModal() {
   const modal = document.getElementById('project-modal');
   const modalBody = modal.querySelector('.modal-body');
@@ -10,9 +7,7 @@ export default function initProjectModal() {
     card.addEventListener('click', () => {
       const projectId = card.dataset.projectId;
       const template = card.querySelector(`#project-${projectId}`);
-      if (!template) return;
-
-      modalBody.innerHTML = ''; // reset previous content
+      modalBody.innerHTML = '';
       modalBody.appendChild(template.content.cloneNode(true));
       modal.style.display = 'flex';
     });
