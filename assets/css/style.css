@@ -349,6 +349,7 @@ body {
 }
 
 /* ---------------- MODAL ---------------- */
+/* animation: partir d'une position traduite+scaled -> centre+scale 1 */
 .modal {
   display: none;
   position: fixed;
@@ -361,8 +362,15 @@ body {
   align-items: center;
   z-index: 2000;
   padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
+.modal--open {
+  opacity: 1;
+}
+
+/* état initial : la modal-content est décalée vers la position de la carte et réduite */
 .modal-content {
   background-color: #0a0a0a;
   padding: 2rem;
@@ -375,8 +383,20 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+
+  /* transform initial --> on part d'un translate(dx,dy) scale(0.2) */
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(0.22);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(.2,.9,.3,1), opacity 0.32s ease;
 }
 
+/* quand la modal s'ouvre on revient à centre/scale 1 */
+.modal--open .modal-content {
+  transform: translate(0px, 0px) scale(1);
+  opacity: 1;
+}
+
+/* garde tes règles existantes pour .modal-close etc. */
 .modal-close {
   position: sticky;
   top: 1rem;
@@ -385,7 +405,7 @@ body {
   cursor: pointer;
   color: #edece4;
   z-index: 10;
-  align-self: flex-end; /* Important pour l'aligner à droite */
+  align-self: flex-end;
 }
 
 .modal-close:hover {

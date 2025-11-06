@@ -12,19 +12,33 @@ export default function initProjectModal() {
   const modalContent = modal?.querySelector('.modal-content');
   /** @type {HTMLElement | null} */
   const closeBtn = modal?.querySelector('.modal-close');
+  if (!modal || !modalBody || !closeBtn || !modalContent) return;
 
-  if (!modal || !modalBody || !closeBtn) {
-    console.warn('Modal elements not found');
-    return;
-  }
+  const ANIM_MS = 420;
+
+  /**
+   * Calcule la largeur de la scrollbar pour éviter le décalage du body.
+   * @returns {number} largeur de la scrollbar
+   */
+  const getScrollbarWidth = () =>
+    window.innerWidth - document.documentElement.clientWidth;
 
   /**
    * Ferme le modal et réinitialise son contenu et le scroll de la page.
    */
   const closeModal = () => {
-    modal.style.display = 'none';
-    modalBody.innerHTML = '';
+    modal.classList.remove('modal--open');
+
+    // Réactive le scroll et enlève la compensation
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+
+    setTimeout(() => {
+      modal.style.display = 'none';
+      modalBody.innerHTML = '';
+      modal.style.removeProperty('--dx');
+      modal.style.removeProperty('--dy');
+    }, ANIM_MS + 20);
   };
 
   // Ajouter l'événement click sur chaque carte de projet
@@ -45,17 +59,40 @@ export default function initProjectModal() {
       const wrapper = document.createElement('div');
       wrapper.classList.add('project-content');
       wrapper.appendChild(clone);
-
       modalBody.appendChild(wrapper);
 
-      // Afficher le modal et bloquer le scroll de la page
-      modal.style.display = 'flex';
+      // --- Compensation de la scrollbar pour éviter le décalage latéral ---
+      const scrollBarWidth = getScrollbarWidth();
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+      }
       document.body.style.overflow = 'hidden';
 
+      // --- Calcul du décalage entre la carte et le centre du modal ---
+      modal.style.display = 'flex';
+
+      const cardRect = card.getBoundingClientRect();
+      const modalRect = modalContent.getBoundingClientRect();
+
+      const dx =
+        cardRect.left +
+        cardRect.width / 2 -
+        (modalRect.left + modalRect.width / 2);
+      const dy =
+        cardRect.top +
+        cardRect.height / 2 -
+        (modalRect.top + modalRect.height / 2);
+
+      modal.style.setProperty('--dx', `${dx}px`);
+      modal.style.setProperty('--dy', `${dy}px`);
+
+      // Forcer un repaint avant de déclencher l'animation
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => modal.classList.add('modal--open'));
+      });
+
       // Réinitialiser le scroll de .modal-content
-      if (modalContent) {
-        modalContent.scrollTop = 0;
-      }
+      modalContent.scrollTop = 0;
     });
   });
 
