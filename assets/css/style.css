@@ -243,13 +243,15 @@ body {
   padding: 6rem 0.5rem;
 }
 
-.projects__title {
+.projects__title,
+.about__title {
   font-family: Oswald, sans-serif;
   font-size: 2.5rem;
   color: #edece4;
   text-transform: uppercase;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   text-align: center;
+  text-shadow: 2px 2px 0 var(--main-color, #e7554e);
 }
 
 .projects__grid {
@@ -295,7 +297,8 @@ body {
   flex-direction: column;
 }
 
-.projects__card-title {
+.projects__card-title,
+.about__profile-title {
   font-family: Oswald, sans-serif;
   font-size: 1.6rem;
   color: #edece4;
@@ -316,7 +319,7 @@ body {
 
 .projects__card:active {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--main-color, #e7554e);
+  box-shadow: 3px 3px 0 #edece4;
 }
 
 /* ---------------- PROJECT TAGS ---------------- */
@@ -330,22 +333,16 @@ body {
 .project-tags .tag {
   display: inline-block;
   background-color: #0a0a0a;
-  color: var(--main-color, #e7554e);
+  color: #edece4;
   border: 2px solid var(--main-color, #e7554e);
   padding: 0.2rem 0.6rem;
   margin: 0 0.5rem 0.5rem 0;
   border-radius: 0;
   font-weight: 600;
   text-transform: uppercase;
-  box-shadow: 4px 4px 0 #edece4;
+  box-shadow: 3px 3px 0 #edece4;
   transition: all 0.2s ease;
   cursor: default;
-}
-
-.project-tags .tag:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #edece4;
-  background-color: #111;
 }
 
 /* ---------------- MODAL ---------------- */
@@ -494,29 +491,142 @@ body {
 /* ---------------- ABOUT ---------------- */
 .about {
   padding: 6rem 0.5rem;
+  position: relative;
+  z-index: 10; /* Passer au-dessus des bulles */
 }
 
-.about h2 {
+/* Container avec fond pour lisibilité */
+.about__container {
+  background-color: #0a0a0a;
+  border: 3px solid var(--main-color, #e7554e);
+  box-shadow: 6px 6px 0 #edece4;
+  padding: 6rem 2rem;
+}
+
+/* Layout en deux colonnes */
+.about__content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Colonne gauche - Card profile */
+.about__profile {
+  padding: 2rem;
+}
+
+.about__avatar {
+  width: 120px;
+  height: 120px;
+  background-color: #0a0a0a;
+  border: 3px solid var(--main-color, #e7554e);
+  box-shadow: 4px 4px 0 #edece4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
   font-family: Oswald, sans-serif;
-  font-size: 2.5rem;
-  color: var(--main-color, #e7554e);
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #edece4;
 }
 
-.about p {
+.about__profile-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.about__role {
+  text-align: center;
+  color: var(--main-color, #e7554e);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--main-color, #e7554e);
+}
+
+/* Badges */
+.about__badges {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about__badge {
+  background-color: var(--main-color, #e7554e);
+  border: 2px solid #181617;
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #181617;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 4px 4px 0 #edece4;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.about__badge:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #edece4;
+}
+
+.about__badge:active {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #edece4;
+}
+
+.about__badge-icon {
+  margin-right: 0.5rem;
+}
+
+/* Colonne droite - Texte */
+.about__text p {
   font-family: Inter, sans-serif;
   font-size: 1.1rem;
   color: #edece4;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto 1.5rem;
-  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
-.about p strong {
+.about__text p strong {
   color: var(--main-color, #e7554e);
+  font-weight: 600;
+}
+
+/* Highlights - Points clés */
+.about__highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.about__highlight {
+  background-color: #0a0a0a;
+  border: 3px solid var(--main-color, #e7554e);
+  box-shadow: 4px 4px 0 #edece4;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.about__highlight-title {
+  font-family: Oswald, sans-serif;
+  font-size: 1.1rem;
+  color: var(--main-color, #e7554e);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.about__highlight-text {
+  font-size: 0.95rem;
+  color: #edece4;
+  line-height: 1.5;
 }
 
 /* ---------------- BACK TO TOP ---------------- */
@@ -527,7 +637,7 @@ body {
   background-color: var(--main-color, #e7554e);
   color: #0a0a0a;
   border: 3px solid #181617;
-  box-shadow: 6px 6px 0 #edece4;
+  box-shadow: 4px 4px 0 #edece4;
   font-size: 1.5rem;
   font-weight: bold;
   width: 50px;
@@ -540,14 +650,14 @@ body {
 }
 
 #back-to-top:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 #edece4;
   background-color: var(--main-color, #e7554e);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #edece4;
 }
 
 #back-to-top:active {
   transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 #edece4;
+  box-shadow: 4px 4px 0 #edece4;
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -629,5 +739,54 @@ body {
   } /* padding interne géré par .projects__card-content */
   .projects__card-title {
     font-size: 1.4rem;
+  }
+}
+
+/* ---------------- RESPONSIVE ABOUT ---------------- */
+@media (width <= 968px) {
+  .about__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about__profile {
+    position: static;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .about__highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width <= 768px) {
+  .about__container {
+    padding: 2rem 1.5rem;
+  }
+
+  .about h2 {
+    font-size: 2rem;
+  }
+
+  .about__highlights {
+    gap: 1rem;
+  }
+
+  .about__highlight {
+    padding: 1.25rem;
+  }
+}
+
+@media (width <= 480px) {
+  .about__container {
+    padding: 1.5rem 1rem;
+    box-shadow: 8px 8px 0 #edece4;
+  }
+
+  .about__avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
   }
 }

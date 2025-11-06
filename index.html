@@ -8,6 +8,10 @@
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="/Portfolio/assets/css/style.css" />
   </head>
 
@@ -347,29 +351,89 @@ Le jeu indique ensuite si le nombre mystère est <strong>plus grand</strong>, <s
 
     <!-- Section À propos -->
     <section id="about" class="about wrapper">
-      <h2 class="projects__title">À propos de moi</h2>
-      <p>
-        Bonjour, je suis
-        <strong>François Novais</strong>
-        , développeur
-        <strong>fullstack en reconversion</strong>
-        . Après avoir changé de voie, je me consacre au développement web avec
-        l'envie d'apprendre et de progresser chaque jour.
-      </p>
-      <p>
-        J'apprends en construisant : chaque projet de ce portfolio m'a permis de
-        <strong>progresser sur une nouvelle stack</strong>
-        ou de
-        <strong>résoudre un problème concret</strong>
-        . Du frontend au backend, je travaille sur tous les aspects d'une
-        application web avec des technologies variées.
-      </p>
-      <p>
-        Toujours curieux et motivé à relever de nouveaux défis techniques, je
-        cherche à construire des
-        <strong>projets utiles et bien pensés</strong>
-        .
-      </p>
+      <div class="about__container">
+        <h2 class="about__title">À propos de moi</h2>
+        <div class="about__content">
+          <!-- Colonne gauche - Profile card -->
+          <aside class="about__profile">
+            <div class="about__avatar">FN</div>
+            <h3 class="about__profile-title">François Novais</h3>
+            <p class="about__role">Développeur Fullstack</p>
+
+            <div class="about__badges">
+              <a
+                href="https://github.com/ton-username"
+                target="_blank"
+                class="about__badge"
+              >
+                <i class="fab fa-github about__badge-icon"></i>
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/ton-username"
+                target="_blank"
+                class="about__badge"
+              >
+                <i class="fab fa-linkedin about__badge-icon"></i>
+                LinkedIn
+              </a>
+            </div>
+          </aside>
+
+          <!-- Colonne droite - Texte principal -->
+          <div class="about__text">
+            <p>
+              En reconversion pour devenir
+              <strong>développeur fullstack</strong>
+              , je me plonge dans le développement web avec curiosité et
+              motivation, toujours désireux d’apprendre et de progresser chaque
+              jour.
+            </p>
+            <p>
+              J'apprends en construisant : chaque projet de ce portfolio m'a
+              permis de
+              <strong>progresser sur une nouvelle stack</strong>
+              ou de
+              <strong>résoudre un problème concret</strong>
+              . Du frontend au backend, je travaille sur tous les aspects d'une
+              application web avec des technologies variées.
+            </p>
+            <p>
+              Toujours curieux et motivé à relever de nouveaux défis techniques,
+              je cherche à construire des
+              <strong>projets utiles et bien pensés</strong>
+              .
+            </p>
+
+            <!-- Points clés visuels -->
+            <div class="about__highlights">
+              <div class="about__highlight">
+                <h4 class="about__highlight-title">Polyvalence</h4>
+                <p class="about__highlight-text">
+                  Frontend, backend et bases de données pour des projets
+                  complets
+                </p>
+              </div>
+
+              <div class="about__highlight">
+                <h4 class="about__highlight-title">Innovation</h4>
+                <p class="about__highlight-text">
+                  Explorer de nouvelles technologies et trouver des solutions
+                  originales
+                </p>
+              </div>
+
+              <div class="about__highlight">
+                <h4 class="about__highlight-title">Pragmatisme</h4>
+                <p class="about__highlight-text">
+                  Créer des applications fonctionnelles et efficaces, prêtes à
+                  l’usage
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Modal générale -->
@@ -384,19 +448,11 @@ Le jeu indique ensuite si le nombre mystère est <strong>plus grand</strong>, <s
     <footer class="footer">
       <div class="footer-content wrapper">
         <p>
-          &copy; 2025 François Novais — Développeur Fullstack
+          &copy; 2025 François Novais - Développeur Fullstack
           <br />
-          <a
-            href="https://github.com/FrancoisNovais"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
         </p>
       </div>
     </footer>
-    import initProjectModal from "/Portfolio/assets/js/modal.js";
     <!-- Bouton "Remonter en haut" -->
     <button id="back-to-top" title="Remonter en haut">↑</button>
     <button id="back-to-top" title="Remonter en haut">↑</button>
