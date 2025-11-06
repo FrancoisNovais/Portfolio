@@ -1,6 +1,11 @@
+/**
+ * Initialise le message de bienvenue dans la console.
+ * Affiche les liens LinkedIn et GitHub, et explique comment lancer le jeu avec `play()`.
+ */
 export default function initConsoleWelcome() {
   console.clear();
 
+  /** Styles pour les logs de la console */
   const styles = {
     title: 'color:#00adb5; font-size:18px; font-weight:bold;',
     info: 'color:#eeeeee; font-size:14px;',
@@ -25,10 +30,15 @@ export default function initConsoleWelcome() {
 
   console.log(
     "\n💡 Et sinon… si tu aimes l’aventure, n'hésite pas à taper %cplay()%c pour un petit moment de fun dans cette console !",
-    styles.link, // style pour "play()"
+    styles.link, // style appliqué à "play()"
     styles.hint // style pour le reste du texte après "play()"
   );
 
-  // Expose play() pour lancer le jeu
-  window.play = () => import('./console-play.js').then((m) => m.default());
+  /**
+   * Lance le jeu Console Dungeon Crawler depuis la console.
+   * Import dynamique du module `console-play.js`.
+   * @returns {Promise<void>}
+   */
+  window.play = () =>
+    import('./console-play.js').then((module) => module.default());
 }

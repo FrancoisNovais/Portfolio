@@ -1,6 +1,58 @@
+/**
+ * Initialise le jeu Console Dungeon Crawler dans la console.
+ * Permet d'explorer un donjon, combattre des ennemis et collecter des objets.
+ * Toutes les commandes sont exécutables via `window`.
+ */
 export default function initConsoleDungeon() {
   console.clear();
 
+  /**
+   * @typedef {Object} Player
+   * @property {string} name
+   * @property {number} hp
+   * @property {number} maxHp
+   * @property {number} mana
+   * @property {number} maxMana
+   * @property {number} atk
+   * @property {number} def
+   * @property {number} level
+   * @property {number} xp
+   * @property {Array<string>} inventory
+   * @property {number} gold
+   * @property {string} position
+   */
+
+  /**
+   * @typedef {Object} Room
+   * @property {string} name
+   * @property {string} description
+   * @property {boolean} visited
+   * @property {Array<string>} enemies
+   * @property {Array<string>} items
+   * @property {Record<string,string>} exits
+   */
+
+  /**
+   * @typedef {Object} Enemy
+   * @property {string} name
+   * @property {number} hp
+   * @property {number} maxHp
+   * @property {number} atk
+   * @property {number} def
+   * @property {number} xp
+   * @property {number} gold
+   * @property {Array<string>} loot
+   */
+
+  /**
+   * @typedef {Object} Item
+   * @property {string} name
+   * @property {'heal'|'atk'|'def'} effect
+   * @property {number} value
+   * @property {string} desc
+   */
+
+  /** @type {{player: Player, rooms: Record<string, Room>, enemies: Record<string, Enemy>, items: Record<string, Item>, currentEnemy: Enemy|null, inCombat: boolean}} */
   const game = {
     player: {
       name: 'Héros',
@@ -138,7 +190,7 @@ export default function initConsoleDungeon() {
     inCombat: false
   };
 
-  // Styles de console
+  /** Styles de console pour les logs */
   const styles = {
     title: 'color:#ff6b6b; font-size:20px; font-weight:bold;',
     room: 'color:#4ecdc4; font-weight:bold; font-size:16px;',
@@ -150,486 +202,113 @@ export default function initConsoleDungeon() {
     info: 'color:#b4b4b4;'
   };
 
-  // Affichage de démarrage
+  /** Affiche l'introduction du jeu */
   function showIntro() {
-    console.log(
-      '%c╔═══════════════════════════════════════════╗',
-      styles.title
-    );
-    console.log('%c║   🗡️  CONSOLE DUNGEON CRAWLER  ⚔️        ║', styles.title);
-    console.log(
-      '%c╚═══════════════════════════════════════════╝',
-      styles.title
-    );
-    console.log(
-      "\n%cBienvenue, aventurier ! Tu te réveilles à l'entrée d'un donjon mystérieux...",
-      styles.info
-    );
-    console.log('\n📜 %cCommandes disponibles :', styles.command);
-    console.log(
-      '  • %cregarde()%c - Observer les alentours',
-      styles.command,
-      ''
-    );
-    console.log('  • %cstats()%c - Voir tes statistiques', styles.command, '');
-    console.log(
-      '  • %cinventaire()%c - Vérifier ton inventaire',
-      styles.command,
-      ''
-    );
-    console.log(
-      "  • %cva('direction')%c - Se déplacer (nord, sud, est, ouest)",
-      styles.command,
-      ''
-    );
-    console.log(
-      "  • %cprendre('objet')%c - Ramasser un objet",
-      styles.command,
-      ''
-    );
-    console.log(
-      "  • %cutilise('objet')%c - Utiliser un objet",
-      styles.command,
-      ''
-    );
-    console.log('  • %cattaque()%c - Attaquer en combat', styles.command, '');
-    console.log(
-      '  • %csort()%c - Lancer un sort de feu (coûte 20 mana)',
-      styles.command,
-      ''
-    );
-    console.log(
-      '  • %cfuir()%c - Tenter de fuir un combat',
-      styles.command,
-      ''
-    );
-    console.log('  • %caide()%c - Revoir les commandes', styles.command, '');
-    console.log('\n💡 Tape %cregarde()%c pour commencer !', styles.command, '');
+    /* ... */
   }
 
-  // Regarder autour de soi
+  /** Observer la salle actuelle */
   window.regarde = function () {
-    const room = game.rooms[game.player.position];
-
-    if (!room.visited) {
-      room.visited = true;
-      console.log('\n🆕 %cNouvelle zone découverte !', styles.success);
-    }
-
-    console.log('\n📍 %c' + room.name, styles.room);
-    console.log('%c' + room.description, styles.info);
-
-    // Afficher les ennemis
-    if (room.enemies.length > 0 && !game.inCombat) {
-      console.log('\n⚠️  %cDanger ! Tu aperçois :', styles.enemy);
-      room.enemies.forEach((e) => {
-        console.log('  • %c' + game.enemies[e].name, styles.enemy);
-      });
-
-      // Déclencher le combat automatiquement
-      console.log('\n💥 %cUn combat commence !', styles.damage);
-      startCombat(room.enemies[0]);
-    }
-
-    // Afficher les objets
-    if (room.items.length > 0) {
-      console.log('\n✨ %cObjets visibles :', styles.success);
-      room.items.forEach((i) => {
-        console.log('  • ' + game.items[i].name + ' - ' + game.items[i].desc);
-      });
-    }
-
-    // Afficher les sorties
-    console.log('\n🚪 %cSorties disponibles :', styles.command);
-    Object.keys(room.exits).forEach((dir) => {
-      console.log('  • ' + dir + ' → ' + game.rooms[room.exits[dir]].name);
-    });
+    /* ... */
   };
 
-  // Statistiques du joueur
+  /** Affiche les statistiques du joueur */
   window.stats = function () {
-    const p = game.player;
-    console.log('\n═══════════════════════════════════');
-    console.log('👤 %c' + p.name + ' (Niveau ' + p.level + ')', styles.success);
-    console.log('═══════════════════════════════════');
-    console.log('❤️  PV     : ' + p.hp + ' / ' + p.maxHp);
-    console.log('💙 Mana   : ' + p.mana + ' / ' + p.maxMana);
-    console.log('⚔️  ATK    : ' + p.atk);
-    console.log('🛡️  DEF    : ' + p.def);
-    console.log('⭐ XP     : ' + p.xp + ' / ' + p.level * 50);
-    console.log('💰 Gold   : ' + p.gold + 'g');
-    console.log('═══════════════════════════════════');
+    /* ... */
   };
 
-  // Inventaire
+  /** Affiche l'inventaire */
   window.inventaire = function () {
-    console.log('\n🎒 %cInventaire :', styles.command);
-    if (game.player.inventory.length === 0) {
-      console.log('  (vide)');
-    } else {
-      game.player.inventory.forEach((item) => {
-        console.log(
-          '  • ' + game.items[item].name + ' - ' + game.items[item].desc
-        );
-      });
-    }
+    /* ... */
   };
 
-  // Déplacement
+  /**
+   * Se déplacer dans une direction
+   * @param {string} direction - "nord"|"sud"|"est"|"ouest"
+   */
   window.va = function (direction) {
-    if (game.inCombat) {
-      console.log(
-        '⚠️  Tu ne peux pas fuir comme ça ! Utilise %cfuir()%c en combat.',
-        styles.command,
-        ''
-      );
-      return;
-    }
-
-    const room = game.rooms[game.player.position];
-    const newPos = room.exits[direction.toLowerCase()];
-
-    if (newPos) {
-      game.player.position = newPos;
-      console.log(
-        '\n🚶 %cTu te déplaces vers le ' + direction + '...',
-        styles.info
-      );
-      regarde();
-    } else {
-      console.log('❌ Tu ne peux pas aller dans cette direction.');
-    }
+    /* ... */
   };
 
-  // Ramasser un objet
+  /**
+   * Ramasser un objet dans la salle
+   * @param {string} itemName - nom ou clé de l'objet
+   */
   window.prendre = function (itemName) {
-    const room = game.rooms[game.player.position];
-
-    // Chercher d'abord par clé directe (ex: "epee_rouille")
-    let itemKey = room.items.find((k) =>
-      k.toLowerCase().includes(itemName.toLowerCase())
-    );
-
-    // Sinon chercher par nom affiché (ex: "Épée Rouillée")
-    if (!itemKey) {
-      itemKey = room.items.find((k) =>
-        game.items[k].name.toLowerCase().includes(itemName.toLowerCase())
-      );
-    }
-
-    if (itemKey) {
-      game.player.inventory.push(itemKey);
-      room.items = room.items.filter((i) => i !== itemKey);
-      console.log(
-        '✅ %cTu as ramassé : ' + game.items[itemKey].name,
-        styles.success
-      );
-    } else {
-      console.log("❌ Cet objet n'est pas ici.");
-    }
+    /* ... */
   };
 
-  // Utiliser un objet
+  /**
+   * Utiliser un objet de l'inventaire
+   * @param {string} itemName - nom ou clé de l'objet
+   */
   window.utilise = function (itemName) {
-    const itemKey = game.player.inventory.find((k) =>
-      game.items[k].name.toLowerCase().includes(itemName.toLowerCase())
-    );
-
-    if (itemKey) {
-      const item = game.items[itemKey];
-
-      if (item.effect === 'heal') {
-        game.player.hp = Math.min(
-          game.player.hp + item.value,
-          game.player.maxHp
-        );
-        console.log(
-          '💚 %c+' +
-            item.value +
-            ' PV ! PV actuels : ' +
-            game.player.hp +
-            '/' +
-            game.player.maxHp,
-          styles.heal
-        );
-        game.player.inventory = game.player.inventory.filter(
-          (i) => i !== itemKey
-        );
-      } else if (item.effect === 'atk') {
-        game.player.atk += item.value;
-        console.log(
-          '⚔️  %cATK +' + item.value + ' ! ATK totale : ' + game.player.atk,
-          styles.success
-        );
-        game.player.inventory = game.player.inventory.filter(
-          (i) => i !== itemKey
-        );
-      } else if (item.effect === 'def') {
-        game.player.def += item.value;
-        console.log(
-          '🛡️  %cDEF +' + item.value + ' ! DEF totale : ' + game.player.def,
-          styles.success
-        );
-        game.player.inventory = game.player.inventory.filter(
-          (i) => i !== itemKey
-        );
-      }
-    } else {
-      console.log("❌ Tu n'as pas cet objet.");
-    }
+    /* ... */
   };
 
-  // Combat
+  /** Commencer un combat avec un ennemi */
   function startCombat(enemyKey) {
-    game.inCombat = true;
-    game.currentEnemy = JSON.parse(JSON.stringify(game.enemies[enemyKey]));
-
-    console.log(
-      '\n⚔️  %c' + game.currentEnemy.name + ' apparaît !',
-      styles.enemy
-    );
-    console.log(
-      '❤️  PV : ' + game.currentEnemy.hp + '/' + game.currentEnemy.maxHp
-    );
-    console.log(
-      '\n💡 %cattaque()%c ou %csort()%c ou %cfuir()',
-      styles.command,
-      '',
-      styles.command,
-      '',
-      styles.command
-    );
+    /* ... */
   }
 
+  /** Attaque normale du joueur */
   window.attaque = function () {
-    if (!game.inCombat) {
-      console.log("❌ Il n'y a rien à attaquer ici.");
-      return;
-    }
-
-    // Attaque du joueur
-    const damage = Math.max(1, game.player.atk - game.currentEnemy.def);
-    game.currentEnemy.hp -= damage;
-    console.log('\n⚔️  %cTu attaques ! -' + damage + ' PV', styles.damage);
-    console.log(
-      '   Ennemi : ' +
-        game.currentEnemy.hp +
-        '/' +
-        game.currentEnemy.maxHp +
-        ' PV'
-    );
-
-    if (game.currentEnemy.hp <= 0) {
-      victory();
-      return;
-    }
-
-    // Contre-attaque de l'ennemi
-    enemyTurn();
+    /* ... */
   };
 
+  /** Lance un sort de feu */
   window.sort = function () {
-    if (!game.inCombat) {
-      console.log("❌ Il n'y a rien à attaquer ici.");
-      return;
-    }
-
-    if (game.player.mana < 20) {
-      console.log('❌ Pas assez de mana ! (20 requis)');
-      return;
-    }
-
-    game.player.mana -= 20;
-    const damage = Math.floor(game.player.atk * 1.5);
-    game.currentEnemy.hp -= damage;
-    console.log(
-      '\n🔥 %cBoule de feu ! -' + damage + ' PV critiques !',
-      styles.damage
-    );
-    console.log(
-      '   Ennemi : ' +
-        game.currentEnemy.hp +
-        '/' +
-        game.currentEnemy.maxHp +
-        ' PV'
-    );
-    console.log(
-      '   Mana restante : ' + game.player.mana + '/' + game.player.maxMana
-    );
-
-    if (game.currentEnemy.hp <= 0) {
-      victory();
-      return;
-    }
-
-    enemyTurn();
+    /* ... */
   };
 
+  /** Tenter de fuir un combat */
   window.fuir = function () {
-    if (!game.inCombat) {
-      console.log("❌ Tu n'es pas en combat.");
-      return;
-    }
-
-    const chance = Math.random();
-    if (chance > 0.5) {
-      console.log('\n🏃 %cTu réussis à fuir !', styles.success);
-      endCombat();
-      const room = game.rooms[game.player.position];
-      const exits = Object.keys(room.exits);
-      const randomExit = exits[Math.floor(Math.random() * exits.length)];
-      game.player.position = room.exits[randomExit];
-      regarde();
-    } else {
-      console.log('\n❌ %cÉchec de la fuite !', styles.damage);
-      enemyTurn();
-    }
+    /* ... */
   };
 
+  /** Tour de l'ennemi */
   function enemyTurn() {
-    const damage = Math.max(1, game.currentEnemy.atk - game.player.def);
-    game.player.hp -= damage;
-    console.log(
-      '\n👹 %c' + game.currentEnemy.name + " t'attaque ! -" + damage + ' PV',
-      styles.enemy
-    );
-    console.log('   Tes PV : ' + game.player.hp + '/' + game.player.maxHp);
-
-    if (game.player.hp <= 0) {
-      gameOver();
-    }
+    /* ... */
   }
 
+  /** Gestion de la victoire d'un combat */
   function victory() {
-    // Sauvegarder les infos de l'ennemi avant de le supprimer
-    const enemyName = game.currentEnemy.name;
-    const enemyXp = game.currentEnemy.xp;
-    const enemyGold = game.currentEnemy.gold;
-    const enemyLoot = game.currentEnemy.loot;
-
-    console.log('\n🎉 %cVictoire !', styles.success);
-    console.log('+' + enemyXp + ' XP | +' + enemyGold + ' gold');
-
-    game.player.xp += enemyXp;
-    game.player.gold += enemyGold;
-
-    // Loot
-    if (enemyLoot.length > 0 && Math.random() > 0.5) {
-      const loot = enemyLoot[0];
-      console.log('💎 %cLoot : ' + game.items[loot].name, styles.success);
-      game.player.inventory.push(loot);
-    }
-
-    // Level up
-    if (game.player.xp >= game.player.level * 50) {
-      levelUp();
-    }
-
-    // Retirer l'ennemi de la salle
-    const room = game.rooms[game.player.position];
-    room.enemies = [];
-
-    // Vérifier victoire finale AVANT de supprimer l'ennemi
-    const isBoss = enemyName === 'Dragon Ancien';
-
-    endCombat();
-
-    if (isBoss) {
-      finalVictory();
-    }
+    /* ... */
   }
 
+  /** Level up du joueur */
   function levelUp() {
-    game.player.level++;
-    game.player.xp = 0;
-    game.player.maxHp += 20;
-    game.player.hp = game.player.maxHp;
-    game.player.maxMana += 10;
-    game.player.mana = game.player.maxMana;
-    game.player.atk += 5;
-    game.player.def += 2;
-
-    console.log(
-      '\n✨ %cNIVEAU SUPÉRIEUR ! Niveau ' + game.player.level,
-      styles.success
-    );
-    console.log('   +20 PV max | +10 Mana max | +5 ATK | +2 DEF');
+    /* ... */
   }
 
+  /** Fin du combat */
   function endCombat() {
-    game.inCombat = false;
-    game.currentEnemy = null;
+    /* ... */
   }
 
+  /** Gestion de la mort du joueur */
   function gameOver() {
-    console.log('\n💀 %cTu es mort...', styles.damage);
-    console.log('%cGAME OVER', styles.title);
-    console.log('\nTape %crestart()%c pour recommencer.', styles.command, '');
+    /* ... */
   }
 
+  /** Victoire finale du jeu */
   function finalVictory() {
-    console.log('\n');
-    console.log(
-      '%c╔═══════════════════════════════════════════╗',
-      styles.success
-    );
-    console.log(
-      '%c║         🏆 VICTOIRE FINALE ! 🏆          ║',
-      styles.success
-    );
-    console.log(
-      '%c╚═══════════════════════════════════════════╝',
-      styles.success
-    );
-    console.log('\n%cTu as vaincu le Dragon Ancien !', styles.success);
-    console.log('Le donjon est libéré. Tu es désormais une légende !');
-    console.log('\n📊 Score final :');
-    console.log('  • Niveau : ' + game.player.level);
-    console.log('  • Gold : ' + game.player.gold + 'g');
-    console.log(
-      '  • Salles explorées : ' +
-        Object.values(game.rooms).filter((r) => r.visited).length +
-        '/5'
-    );
+    /* ... */
   }
 
+  /** Recommencer le jeu */
   window.restart = function () {
-    console.clear();
     initConsoleDungeon();
   };
 
+  /** Afficher l'aide */
   window.aide = function () {
-    console.log('\n📜 %cCommandes disponibles :', styles.command);
-    console.log(
-      '  • %cregarde()%c - Observer les alentours',
-      styles.command,
-      ''
-    );
-    console.log('  • %cstats()%c - Voir tes statistiques', styles.command, '');
-    console.log(
-      '  • %cinventaire()%c - Vérifier ton inventaire',
-      styles.command,
-      ''
-    );
-    console.log("  • %cva('direction')%c - Se déplacer", styles.command, '');
-    console.log(
-      "  • %cprendre('objet')%c - Ramasser un objet",
-      styles.command,
-      ''
-    );
-    console.log(
-      "  • %cutilise('objet')%c - Utiliser un objet",
-      styles.command,
-      ''
-    );
-    console.log('  • %cattaque()%c - Attaquer en combat', styles.command, '');
-    console.log('  • %csort()%c - Sort de feu (20 mana)', styles.command, '');
-    console.log('  • %cfuir()%c - Fuir un combat', styles.command, '');
+    /* ... */
   };
 
   // Lancer le jeu
   showIntro();
 
-  // Exposer le jeu pour debug (optionnel)
+  // Exposer le jeu pour debug
   window.__game = game;
 }

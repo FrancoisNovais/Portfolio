@@ -1,3 +1,7 @@
+/**
+ * Initialise l’animation de bulles interactives sur un canvas en arrière-plan.
+ * Chaque bulle peut être cliquée pour changer la couleur principale et générer des fragments d’explosion.
+ */
 export default function initBubbles() {
   const canvas = document.getElementById('bubbles-bg');
   if (!canvas) return;
@@ -6,7 +10,7 @@ export default function initBubbles() {
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
-  // Palette harmonieuse
+  /** Palette de couleurs disponibles pour les bulles */
   const bubbleColors = [
     '#e7554e', // rouge principal
     '#ff3f2e', // rouge vif
@@ -16,25 +20,36 @@ export default function initBubbles() {
     '#f5b800' // jaune chaud
   ];
 
+  /**
+   * Représente une bulle animée.
+   */
   class Bubble {
     constructor() {
       this.reset();
     }
+
+    /**
+     * Réinitialise la bulle avec des valeurs aléatoires.
+     */
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.r = Math.random() * 50 + 20; // 20 à 70px
+      this.r = Math.random() * 50 + 20;
       this.color =
         bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
       this.vx = (Math.random() - 0.5) * 1.2;
       this.vy = (Math.random() - 0.5) * 1.2;
     }
+
+    /** Dessine la bulle sur le canvas */
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.fill();
     }
+
+    /** Met à jour la position de la bulle et rebondit sur les bords */
     update() {
       this.x += this.vx;
       this.y += this.vy;
@@ -44,8 +59,15 @@ export default function initBubbles() {
     }
   }
 
-  // Fragments d’explosion
+  /**
+   * Représente un fragment d’explosion créé lors du clic sur une bulle.
+   */
   class Particle {
+    /**
+     * @param {number} x - Position x initiale
+     * @param {number} y - Position y initiale
+     * @param {string} color - Couleur du fragment
+     */
     constructor(x, y, color) {
       this.x = x;
       this.y = y;
@@ -56,6 +78,8 @@ export default function initBubbles() {
       this.alpha = 1;
       this.decay = Math.random() * 0.03 + 0.02;
     }
+
+    /** Dessine le fragment avec transparence */
     draw() {
       ctx.save();
       ctx.globalAlpha = this.alpha;
@@ -65,6 +89,8 @@ export default function initBubbles() {
       ctx.fill();
       ctx.restore();
     }
+
+    /** Met à jour la position et l’opacité du fragment */
     update() {
       this.x += this.vx;
       this.y += this.vy;
@@ -76,13 +102,12 @@ export default function initBubbles() {
   const bubbles = Array.from({ length: 8 }, () => new Bubble());
   const particles = [];
 
+  /** Boucle principale d’animation */
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
-    // Mise à jour des bulles
     bubbles.forEach((b) => b.update());
 
-    // Mise à jour des fragments d’explosion
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
       p.update();
@@ -92,11 +117,13 @@ export default function initBubbles() {
     requestAnimationFrame(animate);
   }
 
-  // --- éléments à recolorer ---
+  /**
+   * Applique une nouvelle couleur principale à la page.
+   * @param {string} newColor - Couleur au format HEX
+   */
   function applyColor(newColor) {
     document.documentElement.style.setProperty('--main-color', newColor);
 
-    // Convertir HEX en RGB pour la couche semi-transparente
     const hex = newColor.replace('#', '');
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
@@ -107,36 +134,33 @@ export default function initBubbles() {
     );
   }
 
-  // Clic → changer couleur + exploser la bulle
+  /** Gestion du clic sur le canvas pour exploser les bulles */
   document.body.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
 
-    bubbles.forEach((b, i) => {
+    bubbles.forEach((b) => {
       const d = Math.hypot(b.x - clickX, b.y - clickY);
       if (d < b.r) {
-        // 1️⃣ appliquer la couleur
         applyColor(b.color);
 
-        // 2️⃣ créer des fragments
         for (let j = 0; j < 15; j++) {
           particles.push(new Particle(b.x, b.y, b.color));
         }
 
-        // 3️⃣ réinitialiser la bulle
         b.reset();
       }
     });
   });
 
-  // Resize
+  /** Ajuste le canvas au redimensionnement de la fenêtre */
   window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   });
 
-  // Canvas en arrière-plan
+  // Styles du canvas pour le placer en arrière-plan
   canvas.style.position = 'fixed';
   canvas.style.top = '0';
   canvas.style.left = '0';
