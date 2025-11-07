@@ -142,9 +142,17 @@ export default function initBubbles() {
   document.body.addEventListener('click', (e) => {
     if (!isAnimating) return;
 
+    // Ignorer les clics sur les éléments interactifs et le contenu
+    const target = e.target;
+    if (
+      target.closest('.hero__cta, .modal, .projects__card, .about__container')
+    ) {
+      return;
+    }
+
     const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+    const clickX = e.clientX;
+    const clickY = e.clientY;
 
     bubbles.forEach((b) => {
       const d = Math.hypot(b.x - clickX, b.y - clickY);
@@ -165,15 +173,6 @@ export default function initBubbles() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   });
-
-  // Styles du canvas pour le placer en arrière-plan
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.style.zIndex = '-1';
-  canvas.style.pointerEvents = 'none';
 
   animate();
 
