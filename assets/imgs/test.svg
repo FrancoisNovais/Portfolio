@@ -1,0 +1,26 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="260px" height="200px">
+  
+  <image x="0px" y="0px" width="0px" height="0px" xlink:href="data:img/png;base64," />
+
+  <text 
+    font-family="NanumGothic" 
+    font-weight="bold" 
+    fill="#000000" 
+    font-size="250px" 
+    transform="matrix(-1,0,0,1,124.75,195)">
+    F
+  </text>
+
+  <text 
+    font-family="NanumGothic" 
+    font-weight="bold" 
+    fill="#000000" 
+    font-size="250px" 
+    x="90px" 
+    y="194px">
+    N
+  </text>
+</svg>
