@@ -15,7 +15,6 @@ export default function initBubbles() {
   /** Palette de couleurs disponibles pour les bulles */
   const bubbleColors = [
     '#e7554e', // rouge principal
-    '#ff3f2e', // rouge vif
     '#1aa182', // vert soutenu
     '#2080ff', // bleu vif
     '#9b30ff', // violet saturé
