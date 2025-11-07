@@ -9,8 +9,8 @@ export default function initBubbles() {
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
-  let animationId = null; // Pour stocker l'ID de l'animation
-  let isAnimating = true; // État de l'animation
+  let animationId = null;
+  let isAnimating = true;
 
   /** Palette de couleurs disponibles pour les bulles */
   const bubbleColors = [
@@ -28,6 +28,8 @@ export default function initBubbles() {
   class Bubble {
     constructor() {
       this.reset();
+      this.hovered = false;
+      this.hoverScale = 1;
     }
 
     /**
@@ -45,8 +47,12 @@ export default function initBubbles() {
 
     /** Dessine la bulle sur le canvas */
     draw() {
+      // Animation smooth du scale
+      const targetScale = this.hovered ? 1.1 : 1;
+      this.hoverScale += (targetScale - this.hoverScale) * 0.15;
+
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, this.r * this.hoverScale, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.fill();
     }
@@ -138,11 +144,13 @@ export default function initBubbles() {
     );
   }
 
-  /** Gestion du clic sur le canvas pour exploser les bulles */
-  document.body.addEventListener('click', (e) => {
-    if (!isAnimating) return;
+  /** Effet de survol : change le curseur quand on est sur une bulle */
+  document.body.addEventListener('mousemove', (e) => {
+    if (!isAnimating) {
+      document.body.style.cursor = 'default';
+      return;
+    }
 
-    // Ignorer les clics sur les éléments interactifs et le contenu
     const target = e.target;
     if (
       target.closest('.hero__cta, .modal, .projects__card, .about__container')
@@ -150,7 +158,32 @@ export default function initBubbles() {
       return;
     }
 
-    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    let isOverBubble = false;
+    bubbles.forEach((b) => {
+      const d = Math.hypot(b.x - mouseX, b.y - mouseY);
+      b.hovered = d < b.r; // Met à jour l'état hover de chaque bulle
+      if (b.hovered) {
+        isOverBubble = true;
+      }
+    });
+
+    document.body.style.cursor = isOverBubble ? 'pointer' : 'default';
+  });
+
+  /** Gestion du clic sur le canvas pour exploser les bulles */
+  document.body.addEventListener('click', (e) => {
+    if (!isAnimating) return;
+
+    const target = e.target;
+    if (
+      target.closest('.hero__cta, .modal, .projects__card, .about__container')
+    ) {
+      return;
+    }
+
     const clickX = e.clientX;
     const clickY = e.clientY;
 
@@ -183,6 +216,7 @@ export default function initBubbles() {
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
+      document.body.style.cursor = 'default';
     },
     start: () => {
       if (!isAnimating) {
