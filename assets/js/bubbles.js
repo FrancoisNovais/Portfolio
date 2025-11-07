@@ -106,7 +106,7 @@ export default function initBubbles() {
     }
   }
 
-  const bubbles = Array.from({ length: 8 }, () => new Bubble());
+  const bubbles = Array.from({ length: 12 }, () => new Bubble());
   const particles = [];
 
   /** Boucle principale d'animation */
