@@ -40,7 +40,9 @@ if (animSwitch) {
   animSwitch.addEventListener('click', () => {
     isPlaying = !isPlaying;
     animSwitch.classList.toggle('paused');
-    animIcon.className = isPlaying ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+    animIcon.className = isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    //                   ↑ Si animation joue → Pause ✅ (pour pouvoir mettre en pause)
+    //                                          ↑ Si arrêtée → Play ✅ (pour pouvoir lancer)
 
     if (isPlaying) {
       bubblesControl.start();
@@ -58,22 +60,29 @@ if (animSwitch) {
  */
 const themeSwitch = document.getElementById('theme-switch');
 if (themeSwitch) {
-  /** @type {HTMLElement} html - L'élément racine <html> pour appliquer les classes de thème. */
   const html = document.documentElement;
-  /** @type {HTMLElement} themeIcon - L'icône à l'intérieur du switch thème. */
   const themeIcon = themeSwitch.querySelector('i');
 
-  /** @type {string} theme - Thème actuel ('light' ou 'dark'). */
-  let theme = localStorage.getItem('theme') || 'dark';
+  // Récupère depuis localStorage OU garde 'dark' si déjà dans le HTML
+  let theme = localStorage.getItem('theme');
 
-  // Applique le thème au chargement
-  html.classList.add(theme + '-mode');
+  if (theme && theme !== 'dark') {
+    // Si un autre thème est sauvegardé, l'applique
+    html.classList.remove('dark-mode');
+    html.classList.add(theme + '-mode');
+  } else if (!theme) {
+    // Première visite : sauvegarde 'dark' (déjà dans le HTML)
+    localStorage.setItem('theme', 'dark');
+    theme = 'dark';
+  } else {
+    theme = 'dark';
+  }
+
+  // Applique l'icône correspondante
   themeIcon.className =
     theme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
 
-  /**
-   * Toggle le thème clair/sombre et met à jour l'icône et le localStorage.
-   */
+  // Toggle au clic
   themeSwitch.addEventListener('click', () => {
     theme = theme === 'light' ? 'dark' : 'light';
     html.classList.toggle('light-mode');
